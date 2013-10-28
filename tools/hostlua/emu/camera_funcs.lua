@@ -374,4 +374,13 @@ function camera_funcs.get_histo_range(n1,n2)
     return 100
 end
 
+-- histogram
+function camera_funcs.monochromify_enable(s)
+    local x=n
+end
+
+function camera_funcs.monochromify_set_colors(r,g,b)
+    return 1
+end
+
 return camera_funcs
