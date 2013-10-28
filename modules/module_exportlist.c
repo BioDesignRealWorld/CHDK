@@ -360,6 +360,11 @@
             shot_histogram_set,
             live_histogram_read_y,
 
+            monochromify,
+            monochromify_set,
+            monochromify_isenabled,
+            monochromify_keep_rgb,
+
             stat_get_vbatt,
             swap_partitions,
             get_part_count,

@@ -8,6 +8,7 @@
 #include "console.h"
 #include "action_stack.h"
 #include "shot_histogram.h"
+#include "monochromify.h"
 #include "lang.h"
 #include "gui.h"
 #include "gui_lang.h"
@@ -225,7 +226,8 @@ void script_end()
     action_stack_kill(running_script_stack_name);
     running_script_stack_name = -1;
 
-	shot_histogram_set(0);
+    shot_histogram_set(0);
+    monochromify_set(0);
     kbd_key_release_all();
 
     conf_setAutosave(1);    // Turn on autosave of config file in conf_setValue in case script turned it off
@@ -237,6 +239,7 @@ long script_start_gui( int autostart )
     int i;
 
     shot_histogram_set(0);
+    monochromify_set(0);
     camera_info.state.auto_started = autostart;
 
     // Keyboard init

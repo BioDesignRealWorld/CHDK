@@ -40,6 +40,7 @@
 #include "ptp_chdk.h"
 #include "histogram.h"
 #include "shot_histogram.h"
+#include "monochromify.h"
 #include "action_stack.h"
 #include "debug_led.h"
 #include "raw.h"
