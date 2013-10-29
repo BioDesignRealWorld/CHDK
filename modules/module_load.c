@@ -41,6 +41,7 @@
 #include "histogram.h"
 #include "shot_histogram.h"
 #include "monochromify.h"
+#include "rgb_count.h"
 #include "action_stack.h"
 #include "debug_led.h"
 #include "raw.h"

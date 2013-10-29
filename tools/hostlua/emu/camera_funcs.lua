@@ -374,12 +374,21 @@ function camera_funcs.get_histo_range(n1,n2)
     return 100
 end
 
--- histogram
+-- remove some of the RGB channels
 function camera_funcs.monochromify_enable(s)
     local x=n
 end
 
 function camera_funcs.monochromify_set_colors(r,g,b)
+    return 1
+end
+
+-- count pixels values in some RGB channel
+function camera_funcs.rgb_count_enable(s)
+    local x=n
+end
+
+function camera_funcs.rgb_count_get_subgrid(x,y)
     return 1
 end
 

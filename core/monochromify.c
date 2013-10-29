@@ -2,14 +2,15 @@
 #include "conf.h"
 #include "monochromify.h"
 #include "raw.h"
+#include <stdio.h>
 #include "stdlib.h"
 
 #define RAW_TARGET_DIRECTORY    "A/DCIM/%03dCANON"
 #define RAW_TARGET_FILENAME     "%s_%04d.%s"
 
-unsigned short monochromify_flag = 0;
-unsigned short keep_blue  = 1;
-unsigned short keep_red   = 1;
+unsigned short monochromify_flag = 1;
+unsigned short keep_blue  = 0;
+unsigned short keep_red   = 0;
 unsigned short keep_green = 1;
 
 // enable or disable shot histogram
@@ -54,7 +55,7 @@ void monochromify()
         set_raw_pixel(x,y,0);
     for (y = y0+1 ; y < y1; y += 2)
       for (x = x0+1 ; x < x1; x += 2)
-        set_raw_pixel(x,y,0);
+        set_raw_pixel(x,y,CAM_BLACK_LEVEL);
   }
 
   // zero out (what I believe) is red pixels
@@ -62,7 +63,7 @@ void monochromify()
   {
     for (y = y0 ; y < y1; y += 2)
       for (x = x0+1 ; x < x1; x += 2)
-        set_raw_pixel(x,y,0);
+        set_raw_pixel(x,y,CAM_BLACK_LEVEL);
   }
 
   // zero out (what I believe) is blue pixels
@@ -70,7 +71,7 @@ void monochromify()
   {
     for (y = y0+1 ; y < y1; y += 2)
       for (x = x0 ; x < x1; x += 2)
-        set_raw_pixel(x,y,0);
+        set_raw_pixel(x,y,CAM_BLACK_LEVEL);
   }
 
   /*
@@ -83,11 +84,13 @@ void monochromify()
   sprintf(fn+strlen(fn), RAW_TARGET_FILENAME, "HST", get_target_file_num(), "DAT");
 
   char buf[64];
-  int fd = open(fn, O_WRONLY|O_CREAT, 0777);
-  if (fd>=0) 
+  FILE *f = fopen(fn, 'w');
+  if (f != NULL)
   {
-  write(fd, shot_histogram, 2048);
-  close(fd);
-  } */
+    //write(fd, shot_histogram, 2048);
+    fprintf(f, "R%d G%d B%d\n", keep_red, keep_green, keep_blue);
+    fclose(f);
+  }
+  */
 }
 

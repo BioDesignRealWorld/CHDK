@@ -7,6 +7,7 @@
 #include "conf.h"
 #include "shot_histogram.h"
 #include "monochromify.h"
+#include "rgb_count.h"
 #include "raw.h"
 #include "levent.h"
 #include "console.h"
@@ -1393,6 +1394,23 @@ static int luaCB_monochromify_enable( lua_State* L )
   return 0;
 }
 
+static int luaCB_rgb_count_get_subgrid( lua_State* L )
+{
+  int x = (luaL_checknumber(L, 1));
+  int y = (luaL_checknumber(L, 2));
+  if (rgb_count_isenabled())
+    lua_pushnumber( L, rgb_count_get_subgrid(x, y) );
+  else
+    lua_pushnumber(L, -1);
+  return 1;
+}
+
+static int luaCB_rgb_count_enable( lua_State* L )
+{
+  rgb_count_set(luaL_checknumber( L, 1 ));
+  return 0;
+}
+
 /*
 histogram,total=get_live_histo()
 returns a histogram of Y values from the viewport buffer (downsampled by HISTO_STEP_SIZE)
@@ -2572,6 +2590,8 @@ static const luaL_Reg chdk_funcs[] = {
     FUNC(shot_histo_enable)
     FUNC(monochromify_set_colors)
     FUNC(monochromify_enable)
+    FUNC(rgb_count_get_subgrid)
+    FUNC(rgb_count_enable)
     FUNC(get_live_histo)
     FUNC(play_sound)
     FUNC(get_temperature)

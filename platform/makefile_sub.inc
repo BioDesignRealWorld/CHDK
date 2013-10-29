@@ -16,7 +16,8 @@ FWVERADDR=$(shell grep "Firmware Ver" stubs_entry.S | \
 #add platform dependent 'core' files (build as THUMB)
 OBJS+=main.thm.o gui_draw.thm.o \
      gui.thm.o kbd_process.thm.o conf.thm.o gui_osd.thm.o raw.thm.o \
-     shot_histogram.thm.o monochromify.thm.o shooting.thm.o camera_info.thm.o remotecap.thm.o
+     shot_histogram.thm.o shooting.thm.o camera_info.thm.o remotecap.thm.o \
+     monochromify.thm.o rgb_count.thm.o
 
 libplatformsub.a: $(OBJS) bin_compat.h
 

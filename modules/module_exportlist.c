@@ -365,6 +365,11 @@
             monochromify_isenabled,
             monochromify_keep_rgb,
 
+            rgb_count_set,
+            rgb_count_isenabled,
+            rgb_count_get_subgrid,
+            rgb_count,
+
             stat_get_vbatt,
             swap_partitions,
             get_part_count,

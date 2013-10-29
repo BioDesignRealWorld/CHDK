@@ -8,6 +8,7 @@
 #include "modules.h"
 #include "shot_histogram.h"
 #include "monochromify.h"
+#include "rgb_count.h"
 #include "gui_lang.h"
 #include "gui_mbox.h"
 #include "cachebit.h"
@@ -173,6 +174,9 @@ void raw_process(void)
         libdng->capture_data_for_exif();
 	}
     if (camera_info.state.state_kbd_script_run && shot_histogram_isenabled()) build_shot_histogram();
+
+    // count the RGB channels if requested
+    if (camera_info.state.state_kbd_script_run && rgb_count_isenabled()) rgb_count();
 
     // apply monochromification here
     if (camera_info.state.state_kbd_script_run && monochromify_isenabled()) monochromify();
